@@ -1,0 +1,17 @@
+/.vs/XyjVk/FileContentIndex/*.vsidx
+/.vs/XyjVk/v17/*.suo
+/.vs/XyjVk/v17
+/Engine/x64/Debug
+/Engine/x64/Release
+/XyjVk/x64/Debug
+/XyjVk/x64/Release
+/XyjVk/*.user
+/x64/Debug/Engine.idb
+/x64/Debug/Engine.lib
+/x64/Debug/Engine.pdb
+/x64/Debug/XyjVk.exe
+/x64/Debug/XyjVk.pdb
+/x64/Release/Engine.lib
+/x64/Release/Engine.pdb
+/x64/Release/XyjVk.exe
+/x64/Release/XyjVk.pdb

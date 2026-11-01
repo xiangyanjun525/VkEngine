@@ -3,8 +3,39 @@
   <ItemGroup>
     <ClInclude Include="Instance.h" />
     <ClInclude Include="Base.h" />
+    <ClInclude Include="WindowSurface.h" />
+    <ClInclude Include="Device.h" />
+    <ClInclude Include="CommandPool.h" />
+    <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="RenderPass.h" />
+    <ClInclude Include="CommandBuffer.h" />
+    <ClInclude Include="Buffer.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="AppBase.h" />
+    <ClInclude Include="Framebuffer.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Semaphore.h" />
+    <ClInclude Include="Sampler.h" />
+    <ClInclude Include="Fence.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Instance.cpp" />
+    <ClCompile Include="WindowSurface.cpp" />
+    <ClCompile Include="Device.cpp" />
+    <ClCompile Include="CommandPool.cpp" />
+    <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="RenderPass.cpp" />
+    <ClCompile Include="CommandBuffer.cpp" />
+    <ClCompile Include="Buffer.cpp" />
+    <ClCompile Include="AppBase.cpp" />
+    <ClCompile Include="Framebuffer.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Semaphore.cpp" />
+    <ClCompile Include="Sampler.cpp" />
+    <ClCompile Include="Fence.cpp" />
   </ItemGroup>
 </Project>
