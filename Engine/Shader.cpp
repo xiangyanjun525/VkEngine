@@ -7,6 +7,9 @@ namespace Engine
 		VkShaderStageFlagBits shaderStage,
 		const std::string& entryPoint)
 	{
+		mDevice = device;
+		mShaderStage = shaderStage;
+		mEntryPoint = entryPoint;
 		VkShaderModuleCreateInfo shaderCreateInfo = {};
 		shaderCreateInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		shaderCreateInfo.codeSize = codeBuffer.size();

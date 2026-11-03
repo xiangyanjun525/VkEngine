@@ -38,6 +38,9 @@ namespace Engine
 		[[nodiscard]] auto getFormat() const { return mColorFormat; }
 		[[nodiscard]] auto getImageCount() const { return mImageCount; }
 		[[nodiscard]] auto getSwapChain() const { return mSwapChain; }
+		[[nodiscard]] const std::vector<VkImage>& getImages() const { return mImages; }
+		[[nodiscard]] const std::vector<VkImageView>& getImageViews() const { return mImageViews; }
+		[[nodiscard]] auto getExtent() const { return VkExtent2D{ mWidth, mHeight }; }
 	private:
 		Device::Ptr mDevice{ nullptr };
 		WindowSurface::Ptr mSurface{ nullptr };
@@ -49,6 +52,8 @@ namespace Engine
 		std::vector<VkImage>		mImages{};
 		std::vector<VkImageView>	mImageViews{};
 		uint32_t					mImageCount{ 0 };
+		uint32_t					mWidth{ 0 };
+		uint32_t					mHeight{ 0 };
 	};
 }
 

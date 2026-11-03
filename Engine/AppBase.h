@@ -1,28 +1,37 @@
 #pragma once
 #include "Base.h"
-#include <chrono>
 #include "Camera.h"
+#include "Device.h"
+#include "CommandPool.h"
+#include "WindowSurface.h"
+#include "SwapChain.h"
+#include "RenderPass.h"
+#include "Framebuffer.h"
+#include "Image.h"
+#include "Semaphore.h"
+#include "Fence.h"
+#include "CommandBuffer.h"
+#include "Shader.h"
+#include "Utils.h"
+
+constexpr uint32_t maxConcurrentFrames{ 2 };
 namespace Engine
 {
 	class AppBase
 	{
 	public:
+		AppBase() {}
+		virtual ~AppBase();
 		bool mPrepared = false;
-		bool mResized = false;
 		uint32_t mWidth = 1280;
 		uint32_t mHeight = 720;
-
-		float mFrameTimer = 1.0f;
+		bool m_EnableValidationLayers = false;
 
 		struct Settings {
-			/** @brief Activates validation layers (and message output) when set to true */
-			bool validation = false;
 			/** @brief Set to true if fullscreen mode has been requested via command line */
 			bool fullscreen = false;
 			/** @brief Set to true if v-sync will be forced for the swapchain */
 			bool vsync = false;
-			/** @brief Enable UI overlay */
-			bool overlay = true;
 		} mSettings;
 
 		struct {
@@ -34,31 +43,24 @@ namespace Engine
 			glm::vec2 position;
 		} mMouseState;
 
-		// Defines a frame rate independent timer value clamped from -1.0...1.0
-		// For use in animations, rotations, etc.
-		float mTimer = 0.0f;
-		// Multiplier for speeding up (or slowing down) the global timer
-		float mTimerSpeed = 0.25f;
-		bool mPaused = false;
-
 		std::string mTitle = "Xiangyj vkLearn Example";
 		std::string mName = "Xiangyj vkLearn Example";
 
-		Camera::Ptr mCamera{nullptr};
-
+		Camera::Ptr mCamera{ nullptr };
+		Engine::Instance::Ptr mInstance{ nullptr };
+		Engine::Device::Ptr mDevice{ nullptr };
+		Engine::CommandPool::Ptr mCommandPool{ nullptr };
+		Engine::WindowSurface::Ptr mSurface{ nullptr };
 		HWND mWindow;
 		HINSTANCE mWindowInstance;
+
+		/** @brief Default clear color used by the default render pass */
+		VkClearColorValue mDefaultClearColor{ { 0.025f, 0.025f, 0.025f, 1.0f } };
 
 		HWND setupWindow(HINSTANCE hinstance, WNDPROC wndproc);
 		void handleMessages(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 		virtual void render() = 0;
-		/** @brief (Virtual) Called after a key was pressed, can be used to do custom key handling */
-		virtual void keyPressed(uint32_t);
-		/** @brief (Virtual) Called after the mouse cursor moved and before internal events (like camera rotation) is handled */
-		virtual void mouseMoved(double x, double y, bool& handled);
-		/** @brief (Virtual) Called when the window has been resized, can be used by the sample application to recreate resources */
-		virtual void windowResized();
 
 		/** @brief Prepares all Vulkan resources and functions required to run the sample */
 		virtual void prepare();
@@ -73,43 +75,40 @@ namespace Engine
 		/** @brief Presents the current image to the swap chain */
 		void submitFrame(bool skipQueueSubmit = false);
 
-		virtual void OnHandleMessage(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	private:
-		void handleMouseMove(int32_t x, int32_t y);
-		void nextFrame();
+		bool initVulkan();
 
 	protected:
-		std::chrono::time_point<std::chrono::high_resolution_clock> mLastTimestamp, mPrevEnd;
+		Engine::SwapChain::Ptr mSwapChain{ nullptr };
+		Engine::RenderPass::Ptr mRenderPass{ nullptr };
+		std::vector<Engine::Image::Ptr> mDepthStencils{};
+		std::vector<Engine::Framebuffer::Ptr> mFramebuffers{};
+
+		std::array<Engine::CommandBuffer::Ptr, maxConcurrentFrames> mDrawCmdBuffers{};
+		std::array<Engine::Semaphore::Ptr, maxConcurrentFrames> mPresentCompleteSemaphores{};
+		std::vector<Engine::Semaphore::Ptr> mRenderCompleteSemaphores{};
+		std::array<Engine::Fence::Ptr, maxConcurrentFrames> mWaitFences{};
 
 		uint32_t mCurrentImageIndex{ 0 };
 		uint32_t mCurrentBuffer{ 0 };
+
+		/** @brief (Virtual) Setup default depth and stencil views */
+		virtual void setupDepthStencil();
+		/** @brief (Virtual) Setup a default renderpass */
+		virtual void setupRenderPass();
+		/** @brief (Virtual) Setup default framebuffers for all requested swapchain images */
+		virtual void setupFrameBuffer();
+
 	private:
+		void handleMouseMove(int32_t x, int32_t y);
+		void nextFrame();
+		void createSwapChain();
+		void createCommandBuffers();
+		void createSynchronizationPrimitives();
+
 		bool		m_Resizing = false;
 		uint32_t	mDestWidth{};
 		uint32_t	mDestHeight{};
-
-
 	};
-
-	#define	VulkanExample vulkanExample;																		\
-		LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)						\
-	{																									\
-		if (vulkanExample != NULL)																		\
-		{																								\
-			vulkanExample->handleMessages(hWnd, uMsg, wParam, lParam);									\
-		}																								\
-			return (DefWindowProc(hWnd, uMsg, wParam, lParam));												\
-	}																									\
-	int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR, _In_ int) \
-	{																									\
-		for (int32_t i = 0; i < __argc; i++) { VulkanExample::args.push_back(__argv[i]); };  			\
-			vulkanExample = new VulkanExample();															\
-			vulkanExample->initVulkan();																	\
-			vulkanExample->setupWindow(hInstance, WndProc);													\
-			vulkanExample->prepare();																		\
-			vulkanExample->renderLoop();																	\
-			delete(vulkanExample);																			\
-			return 0;																						\
-	}
 }
 
+#include "Entrypoints.h"

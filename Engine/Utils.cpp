@@ -174,7 +174,7 @@ namespace Engine
 	{
 		auto buffer = Buffer::create(
 			device, shareMode, size,
-			VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+			VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
 			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
 		buffer->updateBufferByStage(pData, size);
@@ -192,6 +192,17 @@ namespace Engine
 		{
 			buffer->updateBufferByMap(pData, size);
 		}
+		return buffer;
+	}
+	//*---------------------------------------------------------------------*/
+	Buffer::Ptr Utils::createIndexBuffer(const Device::Ptr& device, VkSharingMode shareMode, VkDeviceSize size, void* pData)
+	{
+		auto buffer = Buffer::create(
+			device, shareMode, size,
+			VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+
+		buffer->updateBufferByStage(pData, size);
 		return buffer;
 	}
 	//*---------------------------------------------------------------------*/
@@ -233,7 +244,7 @@ namespace Engine
 		return imageView;
 	}
 	//*---------------------------------------------------------------------*/
-	std::vector<char> readBinary(const std::string& fileName)
+	std::vector<char> Utils::readBinary(const std::string& fileName)
 	{
 		std::ifstream file(fileName.c_str(), std::ios::ate | std::ios::binary | std::ios::in);
 		if (!file)

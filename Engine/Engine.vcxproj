@@ -24,6 +24,7 @@
     <ProjectGuid>{fcf1e3a5-b159-4112-9329-024954e50dff}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>000Engine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,6 +146,13 @@
     <ClInclude Include="Base.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Description.h" />
+    <ClInclude Include="DescriptorPool.h" />
+    <ClInclude Include="DescriptorSet.h" />
+    <ClInclude Include="DescriptorSetLayout.h" />
+    <ClInclude Include="EngineInclude.h" />
+    <ClInclude Include="Entrypoints.h" />
+    <ClInclude Include="Pipeline.h" />
     <ClInclude Include="CommandBuffer.h" />
     <ClInclude Include="CommandPool.h" />
     <ClInclude Include="Device.h" />
@@ -157,12 +165,18 @@
     <ClInclude Include="Semaphore.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="VertexDefine.h" />
     <ClInclude Include="WindowSurface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AppBase.cpp" />
     <ClCompile Include="Buffer.cpp" />
+    <ClCompile Include="DescriptorPool.cpp" />
+    <ClCompile Include="DescriptorSet.cpp" />
+    <ClCompile Include="DescriptorSetLayout.cpp" />
+    <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="CommandBuffer.cpp" />
     <ClCompile Include="CommandPool.cpp" />
     <ClCompile Include="Device.cpp" />
@@ -175,6 +189,7 @@
     <ClCompile Include="Semaphore.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WindowSurface.cpp" />
   </ItemGroup>

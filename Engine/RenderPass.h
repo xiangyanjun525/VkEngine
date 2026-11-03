@@ -22,7 +22,7 @@ namespace Engine
 		std::vector<VkAttachmentReference> mColorAttachmentReference{};
 		std::vector<VkAttachmentReference> mInputAttachmentReference{};
 		VkAttachmentReference mDepthStencilAttachmentReference{};
-		VkAttachmentReference mResolvedAttachmentReference{};
+		VkAttachmentReference mResolvedAttachmentReference{ VK_ATTACHMENT_UNUSED, VK_IMAGE_LAYOUT_UNDEFINED };
 	};
 
 	class RenderPass

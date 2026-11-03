@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{739a3529-ab25-4f5a-b4b1-afe53e6b4a91}</ProjectGuid>
-    <RootNamespace>XyjVk</RootNamespace>
+    <ProjectGuid>{fe5af2a2-05ec-41ad-ac12-cea638ed87ad}</ProjectGuid>
+    <RootNamespace>My001Triangle</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -137,17 +137,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MyApp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="EngineInclude.h" />
-    <ClInclude Include="MyApp.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{fcf1e3a5-b159-4112-9329-024954e50dff}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

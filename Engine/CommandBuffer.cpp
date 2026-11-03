@@ -57,6 +57,16 @@ namespace Engine
 		vkCmdBindIndexBuffer(mCommandBuffer, buffer, 0, indexType);
 	}
 	//*---------------------------------------------------------------------*/
+	void CommandBuffer::setViewport(const VkViewport& viewport)
+	{
+		vkCmdSetViewport(mCommandBuffer, 0, 1, &viewport);
+	}
+	//*---------------------------------------------------------------------*/
+	void CommandBuffer::setScissor(const VkRect2D& scissor)
+	{
+		vkCmdSetScissor(mCommandBuffer, 0, 1, &scissor);
+	}
+	//*---------------------------------------------------------------------*/
 	void CommandBuffer::bindDescriptorSet(const VkPipelineLayout layout, 
 		const VkDescriptorSet& descriptorSet,
 		VkPipelineBindPoint bindPoint)
@@ -85,6 +95,11 @@ namespace Engine
 		{
 			throw std::runtime_error("Error:failed to end command buffer");
 		}
+	}
+	//*---------------------------------------------------------------------*/
+	void CommandBuffer::reset()
+	{
+		vkResetCommandBuffer(mCommandBuffer, 0);
 	}
 	//*---------------------------------------------------------------------*/
 	void CommandBuffer::copyBufferToBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, 

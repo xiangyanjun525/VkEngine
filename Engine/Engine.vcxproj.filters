@@ -19,6 +19,15 @@
     <ClInclude Include="Semaphore.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="Fence.h" />
+    <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="DescriptorSetLayout.h" />
+    <ClInclude Include="Description.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="DescriptorPool.h" />
+    <ClInclude Include="DescriptorSet.h" />
+    <ClInclude Include="EngineInclude.h" />
+    <ClInclude Include="Entrypoints.h" />
+    <ClInclude Include="VertexDefine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Instance.cpp" />
@@ -37,5 +46,10 @@
     <ClCompile Include="Semaphore.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Fence.cpp" />
+    <ClCompile Include="Pipeline.cpp" />
+    <ClCompile Include="DescriptorSetLayout.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="DescriptorPool.cpp" />
+    <ClCompile Include="DescriptorSet.cpp" />
   </ItemGroup>
 </Project>

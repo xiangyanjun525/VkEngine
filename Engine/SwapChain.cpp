@@ -145,6 +145,20 @@ namespace Engine
 		{
 			throw std::runtime_error("failed to create swapchain");
 		}
+
+		// Retrieve the swapchain images
+		VK_CHECK_RESULT(vkGetSwapchainImagesKHR(mDevice->getDevice(), mSwapChain, &mImageCount, nullptr));
+		mImages.resize(mImageCount);
+		VK_CHECK_RESULT(vkGetSwapchainImagesKHR(mDevice->getDevice(), mSwapChain, &mImageCount, mImages.data()));
+
+		mWidth = swapchainExtent.width;
+		mHeight = swapchainExtent.height;
+
+		// Create an image view for each swapchain image
+		mImageViews.resize(mImageCount);
+		for (uint32_t i = 0; i < mImageCount; i++) {
+			mImageViews[i] = Utils::createImageView(mDevice, mImages[i], mColorFormat, VK_IMAGE_ASPECT_COLOR_BIT);
+		}
 	}
 	//*---------------------------------------------------------------------*/
 	SwapChain::~SwapChain()

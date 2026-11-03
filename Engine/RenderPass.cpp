@@ -39,7 +39,7 @@ namespace Engine
 
 		mSubPassDescription.pDepthStencilAttachment = (mDepthStencilAttachmentReference.layout == VK_IMAGE_LAYOUT_UNDEFINED) ? nullptr : &mDepthStencilAttachmentReference;
 
-		mSubPassDescription.pResolveAttachments = &mResolvedAttachmentReference;
+		mSubPassDescription.pResolveAttachments = (mResolvedAttachmentReference.attachment == VK_ATTACHMENT_UNUSED) ? nullptr : &mResolvedAttachmentReference;
 	}
 	//*---------------------------------------------------------------------*/
 

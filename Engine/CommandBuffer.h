@@ -26,6 +26,10 @@ namespace Engine
 
 		void bindIndexBuffer(const VkBuffer buffer, VkIndexType indexType);
 
+		void setViewport(const VkViewport& viewport);
+
+		void setScissor(const VkRect2D& scissor);
+
 		void bindDescriptorSet(const VkPipelineLayout layout, 
 			const VkDescriptorSet& descriptorSet,
 			VkPipelineBindPoint bindPoint);
@@ -37,6 +41,8 @@ namespace Engine
 		void endRenderPass();
 
 		void end();
+
+		void reset();
 
 		void copyBufferToBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, const std::vector<VkBufferCopy>& copyInfos);
 
